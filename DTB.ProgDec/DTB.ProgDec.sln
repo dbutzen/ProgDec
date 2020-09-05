@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTB.ProgDec.WFUI", "DTB.Pro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTB.ProgDec.BL", "DTB.ProgDec.BL\DTB.ProgDec.BL.csproj", "{410D70D6-2FA0-4F3F-92E9-055C2721DCE2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTB.ProgDec.BL.Models", "DTB.ProgDec.BL.Models\DTB.ProgDec.BL.Models.csproj", "{6F7AFB16-A95C-480B-AFEA-3DCDB5BF0F3E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{410D70D6-2FA0-4F3F-92E9-055C2721DCE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{410D70D6-2FA0-4F3F-92E9-055C2721DCE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{410D70D6-2FA0-4F3F-92E9-055C2721DCE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F7AFB16-A95C-480B-AFEA-3DCDB5BF0F3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F7AFB16-A95C-480B-AFEA-3DCDB5BF0F3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F7AFB16-A95C-480B-AFEA-3DCDB5BF0F3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F7AFB16-A95C-480B-AFEA-3DCDB5BF0F3E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
