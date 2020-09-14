@@ -1,0 +1,6 @@
+C:\Users\Dan\Source\Repos\ProgDec\DTB.ProgDec\DTB.ProgDec.BL.Models\bin\Debug\DTB.ProgDec.BL.Models.dll
+C:\Users\Dan\Source\Repos\ProgDec\DTB.ProgDec\DTB.ProgDec.BL.Models\bin\Debug\DTB.ProgDec.BL.Models.pdb
+C:\Users\Dan\Source\Repos\ProgDec\DTB.ProgDec\DTB.ProgDec.BL.Models\obj\Debug\DTB.ProgDec.BL.Models.csprojAssemblyReference.cache
+C:\Users\Dan\Source\Repos\ProgDec\DTB.ProgDec\DTB.ProgDec.BL.Models\obj\Debug\DTB.ProgDec.BL.Models.csproj.CoreCompileInputs.cache
+C:\Users\Dan\Source\Repos\ProgDec\DTB.ProgDec\DTB.ProgDec.BL.Models\obj\Debug\DTB.ProgDec.BL.Models.dll
+C:\Users\Dan\Source\Repos\ProgDec\DTB.ProgDec\DTB.ProgDec.BL.Models\obj\Debug\DTB.ProgDec.BL.Models.pdb
