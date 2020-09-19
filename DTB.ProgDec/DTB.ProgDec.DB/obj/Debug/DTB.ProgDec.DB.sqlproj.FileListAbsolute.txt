@@ -3,3 +3,4 @@ C:\Users\Dan\Source\Repos\ProgDec\DTB.ProgDec\DTB.ProgDec.DB\obj\Debug\DTB.ProgD
 C:\Users\Dan\Source\Repos\ProgDec\DTB.ProgDec\DTB.ProgDec.DB\bin\Debug\DTB.ProgDec.DB.dacpac
 C:\Users\Dan\Source\Repos\ProgDec\DTB.ProgDec\DTB.ProgDec.DB\bin\Debug\DTB.ProgDec.DB.dll
 C:\Users\Dan\Source\Repos\ProgDec\DTB.ProgDec\DTB.ProgDec.DB\bin\Debug\DTB.ProgDec.DB.pdb
+C:\Users\Dan\source\repos\ProgDec\DTB.ProgDec\DTB.ProgDec.DB\obj\Debug\DTB.ProgDec.DB.sqlprojAssemblyReference.cache

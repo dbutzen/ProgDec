@@ -59,6 +59,59 @@ DROP TABLE IF EXISTS [dbo].[tblDegreeType]
 GO
 
 GO
+PRINT N'Creating [dbo].[tblDegreeType]...';
+
+
+GO
+CREATE TABLE [dbo].[tblDegreeType] (
+    [Id]          INT          NOT NULL,
+    [Description] VARCHAR (50) NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+
+GO
+PRINT N'Creating [dbo].[tblProgDec]...';
+
+
+GO
+CREATE TABLE [dbo].[tblProgDec] (
+    [Id]         INT      NOT NULL,
+    [ProgramId]  INT      NOT NULL,
+    [StudentId]  INT      NOT NULL,
+    [ChangeDate] DATETIME NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+
+GO
+PRINT N'Creating [dbo].[tblProgram]...';
+
+
+GO
+CREATE TABLE [dbo].[tblProgram] (
+    [Id]           INT          NOT NULL,
+    [Description]  VARCHAR (50) NOT NULL,
+    [DegreeTypeId] INT          NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+
+GO
+PRINT N'Creating [dbo].[tblStudent]...';
+
+
+GO
+CREATE TABLE [dbo].[tblStudent] (
+    [Id]        INT          NOT NULL,
+    [FirstName] VARCHAR (30) NOT NULL,
+    [LastName]  VARCHAR (30) NOT NULL,
+    [StudentId] VARCHAR (10) NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+
+GO
 /*
 Post-Deployment Script Template							
 --------------------------------------------------------------------------------------
