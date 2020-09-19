@@ -1,0 +1,12 @@
+C:\Users\Dan\source\repos\ProgDec\DTB.ProgDec\DTB.ProgDec.PL\bin\Debug\DTB.ProgDec.PL.dll.config
+C:\Users\Dan\source\repos\ProgDec\DTB.ProgDec\DTB.ProgDec.PL\bin\Debug\DTB.ProgDec.PL.dll
+C:\Users\Dan\source\repos\ProgDec\DTB.ProgDec\DTB.ProgDec.PL\bin\Debug\DTB.ProgDec.PL.pdb
+C:\Users\Dan\source\repos\ProgDec\DTB.ProgDec\DTB.ProgDec.PL\bin\Debug\EntityFramework.dll
+C:\Users\Dan\source\repos\ProgDec\DTB.ProgDec\DTB.ProgDec.PL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Dan\source\repos\ProgDec\DTB.ProgDec\DTB.ProgDec.PL\bin\Debug\EntityFramework.xml
+C:\Users\Dan\source\repos\ProgDec\DTB.ProgDec\DTB.ProgDec.PL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Dan\source\repos\ProgDec\DTB.ProgDec\DTB.ProgDec.PL\obj\Debug\DTB.ProgDec.PL.csprojAssemblyReference.cache
+C:\Users\Dan\source\repos\ProgDec\DTB.ProgDec\DTB.ProgDec.PL\obj\Debug\DTB.ProgDec.PL.csproj.CoreCompileInputs.cache
+C:\Users\Dan\source\repos\ProgDec\DTB.ProgDec\DTB.ProgDec.PL\obj\Debug\DTB.ProgDec.PL.csproj.CopyComplete
+C:\Users\Dan\source\repos\ProgDec\DTB.ProgDec\DTB.ProgDec.PL\obj\Debug\DTB.ProgDec.PL.dll
+C:\Users\Dan\source\repos\ProgDec\DTB.ProgDec\DTB.ProgDec.PL\obj\Debug\DTB.ProgDec.PL.pdb
