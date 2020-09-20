@@ -1,6 +1,0 @@
-C:\Users\Dan\Source\Repos\ProgDec\DTB.ProgDec\DTB.ProgDec.BL\bin\Debug\DTB.ProgDec.BL.dll
-C:\Users\Dan\Source\Repos\ProgDec\DTB.ProgDec\DTB.ProgDec.BL\bin\Debug\DTB.ProgDec.BL.pdb
-C:\Users\Dan\Source\Repos\ProgDec\DTB.ProgDec\DTB.ProgDec.BL\obj\Debug\DTB.ProgDec.BL.csprojAssemblyReference.cache
-C:\Users\Dan\Source\Repos\ProgDec\DTB.ProgDec\DTB.ProgDec.BL\obj\Debug\DTB.ProgDec.BL.csproj.CoreCompileInputs.cache
-C:\Users\Dan\Source\Repos\ProgDec\DTB.ProgDec\DTB.ProgDec.BL\obj\Debug\DTB.ProgDec.BL.dll
-C:\Users\Dan\Source\Repos\ProgDec\DTB.ProgDec\DTB.ProgDec.BL\obj\Debug\DTB.ProgDec.BL.pdb
