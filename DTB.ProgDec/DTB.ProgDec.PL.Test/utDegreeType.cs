@@ -2,29 +2,39 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DTB.ProgDec.PL;
 using System.Linq;
+using System.Data.Entity;
 
 namespace DTB.ProgDec.PL.Test
 {
     [TestClass]
     public class utDegreeType
     {
+        protected ProgDecEntities dc;
+        protected DbContextTransaction transaction;
+        [TestInitialize]
+        public void Initialize()
+        {
+            dc = new ProgDecEntities();
+            transaction = dc.Database.BeginTransaction();
+        }
+        [TestCleanup]
+        public void TransactionCleanUp()
+        {
+            transaction.Rollback();
+            transaction.Dispose();
+        }
         [TestMethod]
         public void LoadDegreeTypesTest()
         {
-            //Instantiate a datacontext variable (pipe) connected to the database
 
-            ProgDecEntities dc = new ProgDecEntities();
 
-            //What I expect to get back
-            int expected = 3;
+            int expected = 4;
             int actual = 0;
 
-            //Retrieve degree types from DB
             var degreeTypes = dc.tblDegreeTypes;
 
             actual = degreeTypes.Count();
 
-            // Test to see if actual equals expected
             Assert.AreEqual(expected, actual);
 
             dc = null;
@@ -36,10 +46,9 @@ namespace DTB.ProgDec.PL.Test
         {
             //Instantiate a datacontext variable (pipe) connected to the database
 
-            ProgDecEntities dc = new ProgDecEntities();
 
             //What I expect to get back
-            int expected = 3;
+            int expected = 4;
             int actual = 0;
 
             //Retrieve degree types from DB
@@ -58,8 +67,7 @@ namespace DTB.ProgDec.PL.Test
         [TestMethod]
         public void InsertTest()
         {
-            using(ProgDecEntities dc = new ProgDecEntities())
-            {
+           
                 // dc only exists in here
                 // type = 1 row, types = all rows
 
@@ -67,7 +75,7 @@ namespace DTB.ProgDec.PL.Test
                 tblDegreeType newrow = new tblDegreeType();
 
                 //set column values
-                newrow.Id = -99;
+                newrow.Id = -98;
                 newrow.Description = "My New DegreeType";
 
                 // Insert of the row
@@ -80,18 +88,17 @@ namespace DTB.ProgDec.PL.Test
                 Assert.AreNotEqual(0, rowsaffected);
 
 
-            }
+            
         }
 
         [TestMethod]
         public void UpdateTest()
         {
-            using(ProgDecEntities dc = new ProgDecEntities())
-            {
+            
                 // retrieve one degreetype
                 // select * from tblDegreeType where id = -99
                 tblDegreeType existingDegreeType = (from dt in dc.tblDegreeTypes
-                                                   where dt.Id == -99
+                                                   where dt.Id == 1
                                                    select dt).FirstOrDefault();
 
                 if(existingDegreeType != null)
@@ -102,22 +109,21 @@ namespace DTB.ProgDec.PL.Test
                 }
 
                 tblDegreeType updatedDegreeType = (from dt in dc.tblDegreeTypes
-                                                    where dt.Id == -99
+                                                    where dt.Id == 1
                                                     select dt).FirstOrDefault();
 
                 Assert.AreEqual(existingDegreeType.Description, updatedDegreeType.Description);
-            }
+            
         } 
 
         [TestMethod]
         public void DeleteTest()
         {
-            using (ProgDecEntities dc = new ProgDecEntities())
-            {
+           
                 // retrieve one degreetype
                 // select * from tblDegreeType where id = -99
                 tblDegreeType existingDegreeType = (from dt in dc.tblDegreeTypes
-                                                    where dt.Id == -99
+                                                    where dt.Id == -98
                                                     select dt).FirstOrDefault();
 
                 if (existingDegreeType != null)
@@ -128,11 +134,11 @@ namespace DTB.ProgDec.PL.Test
                 }
 
                 tblDegreeType deletedDegreeType = (from dt in dc.tblDegreeTypes
-                                                   where dt.Id == -99
+                                                   where dt.Id == -98
                                                    select dt).FirstOrDefault();
 
                 Assert.IsNull(deletedDegreeType);
-            }
+            
         }
     }
 }
