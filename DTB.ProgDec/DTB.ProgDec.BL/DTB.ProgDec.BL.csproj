@@ -52,8 +52,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DegreeTypeManager.cs" />
+    <Compile Include="ProgDecManager.cs" />
     <Compile Include="ProgramManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StudentManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DTB.ProgDec.BL.Models\DTB.ProgDec.BL.Models.csproj">

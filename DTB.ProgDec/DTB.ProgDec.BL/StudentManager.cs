@@ -9,12 +9,12 @@ using DTB.ProgDec.PL;
 namespace DTB.ProgDec.BL
 {
     // Static so other projects don't have to instantiate the object
-    public static class ProgramManager
+    public static class StudentManager
     {
         // No properties in a static class
 
-        // Insert new Program
-        public static int Insert(Program program)
+        // Insert new Student
+        public static int Insert(Student student)
         {
             // Insert a row
             try
@@ -22,15 +22,18 @@ namespace DTB.ProgDec.BL
                 using (ProgDecEntities dc = new ProgDecEntities())
                 {
                     //Make a new row
-                    tblProgram row = new tblProgram();
+                    tblStudent row = new tblStudent();
 
                     //Set the properties
-                    row.Id = dc.tblPrograms.Any() ? dc.tblPrograms.Max(p => p.Id) + 1 : 1;
-                    row.Description = program.Description;
-                    row.DegreeTypeId = program.DegreeTypeId;
+                    row.Id = dc.tblStudents.Any() ? dc.tblStudents.Max(s => s.Id) + 1 : 1;
+                    row.FirstName = student.FirstName;
+                    row.LastName = student.LastName;
+                    row.StudentId = student.StudentId;
+
+                    student.Id = row.Id;
 
                     // Insert the row
-                    dc.tblPrograms.Add(row);
+                    dc.tblStudents.Add(row);
                     return dc.SaveChanges();
                 }
             }
@@ -41,8 +44,8 @@ namespace DTB.ProgDec.BL
             }
         }
 
-        // Update an existing Program
-        public static int Update(Program program)
+        // Update an existing Student
+        public static int Update(Student student)
         {
             // Update the row
             try
@@ -50,15 +53,15 @@ namespace DTB.ProgDec.BL
                 using (ProgDecEntities dc = new ProgDecEntities())
                 {
                     //Make a new row
-                    tblProgram row = dc.tblPrograms.FirstOrDefault(p => p.Id == program.Id);
+                    tblStudent row = dc.tblStudents.FirstOrDefault(s => s.Id == student.Id);
 
                     if (row != null)
                     {
                         //Set the properties
-                        row.Description = program.Description;
-                        row.DegreeTypeId = program.DegreeTypeId;
+                        row.FirstName = student.FirstName;
+                        row.LastName = student.LastName;
+                        row.StudentId = student.StudentId;
 
-                        program.Id = row.Id;
                         // Insert the row
                         return dc.SaveChanges();
                     }
@@ -74,7 +77,7 @@ namespace DTB.ProgDec.BL
                 throw ex;
             }
         }
-        // Delete and existing Program
+        // Delete and existing Student
         public static int Delete(int id)
         {
             // delete a row
@@ -83,11 +86,11 @@ namespace DTB.ProgDec.BL
                 using (ProgDecEntities dc = new ProgDecEntities())
                 {
                     //Make a new row
-                    tblProgram row = dc.tblPrograms.FirstOrDefault(p => p.Id == id);
+                    tblStudent row = dc.tblStudents.FirstOrDefault(s => s.Id == id);
 
                     if (row != null)
                     {
-                        dc.tblPrograms.Remove(row);
+                        dc.tblStudents.Remove(row);
                         return dc.SaveChanges();
                     }
                     else
@@ -103,21 +106,22 @@ namespace DTB.ProgDec.BL
             }
         }
         // Retrieve all the degree types
-        public static List<Program> Load()
+        public static List<Student> Load()
         {
             try
             {
-                List<Program> rows = new List<Program>();
+                List<Student> rows = new List<Student>();
                 using (ProgDecEntities dc = new ProgDecEntities())
                 {
-                    dc.tblPrograms
+                    dc.tblStudents
                         .ToList()
-                        .ForEach(p => rows.Add(new Program
+                        .ForEach(s => rows.Add(new Student
                         {
-                            Id = p.Id,
-                            DegreeTypeId = p.DegreeTypeId,
-                            Description = p.Description
-                        }));;;
+                            Id = s.Id,
+                            FirstName = s.FirstName,
+                            LastName = s.LastName,
+                            StudentId = s.StudentId
+                        }));
                     return rows;
                 }
             }
@@ -128,17 +132,17 @@ namespace DTB.ProgDec.BL
             }
         }
         // Retrieve one degree type
-        public static Program LoadById(int id)
+        public static Student LoadById(int id)
         {
             try
             {
                 using (ProgDecEntities dc = new ProgDecEntities())
                 {
-                    tblProgram row = dc.tblPrograms.FirstOrDefault(p => p.Id == id);
+                    tblStudent row = dc.tblStudents.FirstOrDefault(s => s.Id == id);
                     if (row != null)
                     {
-                        Program program = new Program { Id = row.Id, Description = row.Description, DegreeTypeId = row.DegreeTypeId };
-                        return program;
+                        Student student = new Student { Id = row.Id, LastName = row.LastName, FirstName = row.FirstName, StudentId = row.StudentId };
+                        return student;
                     }
                     else
                     {

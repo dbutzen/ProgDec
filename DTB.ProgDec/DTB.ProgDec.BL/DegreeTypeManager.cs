@@ -28,6 +28,8 @@ namespace DTB.ProgDec.BL
                     row.Id = dc.tblDegreeTypes.Any() ? dc.tblDegreeTypes.Max(dt => dt.Id) + 1 : 1;
                     row.Description = degreeType.Description;
 
+                    // Backfill Id on degreetype object (param)
+                    degreeType.Id = row.Id;
                     // Insert the row
                     dc.tblDegreeTypes.Add(row);
                     return dc.SaveChanges();
@@ -49,7 +51,7 @@ namespace DTB.ProgDec.BL
                 using (ProgDecEntities dc = new ProgDecEntities())
                 {
                     //Make a new row
-                    tblDegreeType row = dc.tblDegreeTypes.FirstOrDefault(DTB => DTB.Id == degreeType.Id);
+                    tblDegreeType row = dc.tblDegreeTypes.FirstOrDefault(dt => dt.Id == degreeType.Id);
 
                     if (row != null)
                     {
@@ -80,7 +82,7 @@ namespace DTB.ProgDec.BL
                 using (ProgDecEntities dc = new ProgDecEntities())
                 {
                     //Make a new row
-                    tblDegreeType row = dc.tblDegreeTypes.FirstOrDefault(DTB => DTB.Id == id);
+                    tblDegreeType row = dc.tblDegreeTypes.FirstOrDefault(dt => dt.Id == id);
 
                     if (row != null)
                     {
