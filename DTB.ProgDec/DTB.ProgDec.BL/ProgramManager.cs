@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,13 +15,16 @@ namespace DTB.ProgDec.BL
         // No properties in a static class
 
         // Insert new Program
-        public static int Insert(Program program)
+        public static int Insert(Program program, bool rollback = false)
         {
             // Insert a row
             try
             {
+                int results;
                 using (ProgDecEntities dc = new ProgDecEntities())
                 {
+                    DbContextTransaction transaction = null;
+                    if (rollback) transaction = dc.Database.BeginTransaction();
                     //Make a new row
                     tblProgram row = new tblProgram();
 
@@ -31,8 +35,10 @@ namespace DTB.ProgDec.BL
 
                     // Insert the row
                     dc.tblPrograms.Add(row);
-                    return dc.SaveChanges();
+                    results = dc.SaveChanges();
+                    if (rollback) transaction.Rollback();
                 }
+                return results;
             }
             catch (Exception ex)
             {
@@ -42,13 +48,16 @@ namespace DTB.ProgDec.BL
         }
 
         // Update an existing Program
-        public static int Update(Program program)
+        public static int Update(Program program, bool rollback = false)
         {
             // Update the row
             try
             {
+                int results;
                 using (ProgDecEntities dc = new ProgDecEntities())
                 {
+                    DbContextTransaction transaction = null;
+                    if (rollback) transaction = dc.Database.BeginTransaction();
                     //Make a new row
                     tblProgram row = dc.tblPrograms.FirstOrDefault(p => p.Id == program.Id);
 
@@ -60,13 +69,15 @@ namespace DTB.ProgDec.BL
 
                         program.Id = row.Id;
                         // Insert the row
-                        return dc.SaveChanges();
+                        results = dc.SaveChanges();
+                        if (rollback) transaction.Rollback();
                     }
                     else
                     {
                         throw new Exception("Row was not found");
                     }
                 }
+                return results;
             }
             catch (Exception ex)
             {
@@ -75,26 +86,31 @@ namespace DTB.ProgDec.BL
             }
         }
         // Delete and existing Program
-        public static int Delete(int id)
+        public static int Delete(int id, bool rollback = false)
         {
             // delete a row
             try
             {
+                int results;
                 using (ProgDecEntities dc = new ProgDecEntities())
                 {
+                    DbContextTransaction transaction = null;
+                    if (rollback) transaction = dc.Database.BeginTransaction();
                     //Make a new row
                     tblProgram row = dc.tblPrograms.FirstOrDefault(p => p.Id == id);
 
                     if (row != null)
                     {
                         dc.tblPrograms.Remove(row);
-                        return dc.SaveChanges();
+                        results = dc.SaveChanges();
+                        if (rollback) transaction.Rollback();
                     }
                     else
                     {
                         throw new Exception("Row was not found");
                     }
                 }
+                return results;
             }
             catch (Exception ex)
             {

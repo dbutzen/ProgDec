@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,13 +15,17 @@ namespace DTB.ProgDec.BL
         // No properties in a static class
 
         // Insert new DegreeType
-        public static int Insert(DegreeType degreeType)
+        public static int Insert(DegreeType degreeType, bool rollback = false)
         {
             // Insert a row
             try
             {
+                int results = 0;
                 using (ProgDecEntities dc = new ProgDecEntities())
                 {
+                    DbContextTransaction transaction =  null;
+                    if (rollback) transaction = dc.Database.BeginTransaction(); 
+
                     //Make a new row
                     tblDegreeType row = new tblDegreeType();
 
@@ -32,7 +37,10 @@ namespace DTB.ProgDec.BL
                     degreeType.Id = row.Id;
                     // Insert the row
                     dc.tblDegreeTypes.Add(row);
-                    return dc.SaveChanges();
+                    results = dc.SaveChanges();
+
+                    if (rollback) transaction.Rollback();
+                    return results;
                 }
             }
             catch (Exception ex)
@@ -43,13 +51,16 @@ namespace DTB.ProgDec.BL
         }
 
         // Update an existing DegreeType
-        public static int Update(DegreeType degreeType)
+        public static int Update(DegreeType degreeType, bool rollback = false)
         {
             // Update the row
             try
             {
+                int results;
                 using (ProgDecEntities dc = new ProgDecEntities())
                 {
+                    DbContextTransaction transaction = null;
+                    if (rollback) transaction = dc.Database.BeginTransaction();
                     //Make a new row
                     tblDegreeType row = dc.tblDegreeTypes.FirstOrDefault(dt => dt.Id == degreeType.Id);
 
@@ -57,15 +68,18 @@ namespace DTB.ProgDec.BL
                     {
                         //Set the properties
                         row.Description = degreeType.Description;
+                        results = dc.SaveChanges();
 
                         // Insert the row
-                        return dc.SaveChanges();
+                        if (rollback) transaction.Rollback();
                     }
                     else
                     {
                         throw new Exception("Row was not found");
                     }
+                    
                 }
+                return results;
             }
             catch (Exception ex)
             {
@@ -74,26 +88,31 @@ namespace DTB.ProgDec.BL
             }
         }
         // Delete and existing DegreeType
-        public static int Delete(int id)
+        public static int Delete(int id, bool rollback = false)
         {
             // delete a row
             try
             {
+                int results;
                 using (ProgDecEntities dc = new ProgDecEntities())
                 {
+                    DbContextTransaction transaction = null;
+                    if (rollback) transaction = dc.Database.BeginTransaction();
                     //Make a new row
                     tblDegreeType row = dc.tblDegreeTypes.FirstOrDefault(dt => dt.Id == id);
 
                     if (row != null)
                     {
                         dc.tblDegreeTypes.Remove(row);
-                        return dc.SaveChanges();
+                        results = dc.SaveChanges();
+                        if (rollback) transaction.Rollback();
                     }
                     else
                     {
                         throw new Exception("Row was not found");
                     }
                 }
+                return results;
             }
             catch (Exception ex)
             {
