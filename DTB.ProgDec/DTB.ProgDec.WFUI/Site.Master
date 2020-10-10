@@ -68,14 +68,14 @@
                         <a class="nav-link" runat="server" href="~/">Programs</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" runat="server" href="~/">Degree Types</a>
+                        <a class="nav-link" runat="server" href="~/MaintainDegreeTypes">Degree Types</a>
                     </li>
                 </ul>
             </div>
         </nav>
 
 
-        <div class="container body-content">
+        <div class="main container body-content rounded-top">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />
