@@ -13,7 +13,7 @@
             </asp:Label>
         </div>
         <div class="control-label col-md-3">
-            <asp:DropDownList ID="ddlDegreeTypes" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlDegreeTypes_SelectedIndexChanged" >
+            <asp:DropDownList ID="ddlDegreeTypes" runat="server" AutoPostBack="true" CssClass="form-control" OnSelectedIndexChanged="ddlDegreeTypes_SelectedIndexChanged" >
 
             </asp:DropDownList>
         </div>
@@ -21,12 +21,12 @@
 
     <div class="form-row ml-2 mt-2">
         <div class="control-label col-md-2">
-            <asp:Label ID="Label1" runat="server" Text="Descriptipn:">
+            <asp:Label ID="Label1" runat="server" Text="Description:">
 
             </asp:Label>
         </div>
         <div class="control-label col-md-3">
-            <asp:TextBox ID="txtDescription" runat="server">
+            <asp:TextBox ID="txtDescription" runat="server" CssClass="form-control">
 
             </asp:TextBox>
         </div>

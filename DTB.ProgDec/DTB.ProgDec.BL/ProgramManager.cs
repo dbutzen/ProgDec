@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
@@ -32,6 +33,7 @@ namespace DTB.ProgDec.BL
                     row.Id = dc.tblPrograms.Any() ? dc.tblPrograms.Max(p => p.Id) + 1 : 1;
                     row.Description = program.Description;
                     row.DegreeTypeId = program.DegreeTypeId;
+                    program.Id = row.Id;
 
                     // Insert the row
                     dc.tblPrograms.Add(row);
