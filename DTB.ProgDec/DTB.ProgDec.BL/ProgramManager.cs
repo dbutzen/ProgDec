@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using DTB.ProgDec.BL.Models;
@@ -128,14 +129,33 @@ namespace DTB.ProgDec.BL
                 List<Program> rows = new List<Program>();
                 using (ProgDecEntities dc = new ProgDecEntities())
                 {
-                    dc.tblPrograms
+                    /*dc.tblPrograms
                         .ToList()
                         .ForEach(p => rows.Add(new Program
                         {
                             Id = p.Id,
                             DegreeTypeId = p.DegreeTypeId,
                             Description = p.Description
-                        }));;;
+                        })); ; ;*/
+                    var programs = (from p in dc.tblPrograms
+                                    join dt in dc.tblDegreeTypes on p.DegreeTypeId equals dt.Id
+                                    orderby p.Description
+                                    select new
+                                    {
+                                        p.Id,
+                                        p.DegreeTypeId,
+                                        p.Description,
+                                        DegreeName = dt.Description
+                                    }).ToList();
+
+                    programs.ForEach(pdt => rows.Add(new Program
+                    {
+                        Id = pdt.Id,
+                        DegreeTypeId = pdt.DegreeTypeId,
+                        Description = pdt.Description,
+                        DegreeName = pdt.DegreeName
+                    })); ; ;
+
                     return rows;
                 }
             }
@@ -152,10 +172,28 @@ namespace DTB.ProgDec.BL
             {
                 using (ProgDecEntities dc = new ProgDecEntities())
                 {
-                    tblProgram row = dc.tblPrograms.FirstOrDefault(p => p.Id == id);
-                    if (row != null)
+                    //tblProgram row = dc.tblPrograms.FirstOrDefault(p => p.Id == id);
+
+                    var pdt = (from p in dc.tblPrograms
+                               join dt in dc.tblDegreeTypes on p.DegreeTypeId equals dt.Id
+                               where p.Id == id
+                               select new
+                               {
+                                   p.Id,
+                                   p.DegreeTypeId,
+                                   p.Description,
+                                   DegreeName = dt.Description
+                               }).FirstOrDefault();
+
+                    if (pdt != null)
                     {
-                        Program program = new Program { Id = row.Id, Description = row.Description, DegreeTypeId = row.DegreeTypeId };
+                        Program program = new Program 
+                        {
+                            Id = pdt.Id,
+                            Description = pdt.Description,
+                            DegreeTypeId = pdt.DegreeTypeId,
+                            DegreeName = pdt.DegreeName 
+                        };
                         return program;
                     }
                     else

@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTB.ProgDec.BL.Test", "DTB.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTB.Bands.UI", "DTB.Bands.UI\DTB.Bands.UI.csproj", "{E55A71D1-A927-496C-A2C8-C27D4DCBED6A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTB.ProgDec.MVCUI", "DTB.ProgDec.MVCUI\DTB.ProgDec.MVCUI.csproj", "{63C34E1A-C11F-460A-9C3E-DFC09091E1C3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{E55A71D1-A927-496C-A2C8-C27D4DCBED6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E55A71D1-A927-496C-A2C8-C27D4DCBED6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E55A71D1-A927-496C-A2C8-C27D4DCBED6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63C34E1A-C11F-460A-9C3E-DFC09091E1C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63C34E1A-C11F-460A-9C3E-DFC09091E1C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63C34E1A-C11F-460A-9C3E-DFC09091E1C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63C34E1A-C11F-460A-9C3E-DFC09091E1C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

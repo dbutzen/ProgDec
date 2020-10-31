@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using DTB.ProgDec.BL.Models;
@@ -129,14 +130,35 @@ namespace DTB.ProgDec.BL
                 List<Models.ProgDec> rows = new List<Models.ProgDec>();
                 using (ProgDecEntities dc = new ProgDecEntities())
                 {
-                    dc.tblProgDecs
-                        .ToList()
-                        .ForEach(pd => rows.Add(new Models.ProgDec
+
+                    var progdecs = (from pd in dc.tblProgDecs
+                                    join s in dc.tblStudents on pd.StudentId equals s.Id
+                                    join p in dc.tblPrograms on pd.ProgramId equals p.Id
+                                    join dt in dc.tblDegreeTypes on p.DegreeTypeId equals dt.Id
+                                    orderby s.LastName
+                                    select new
+                                    {
+                                        ProdDecId = pd.Id,
+                                        ProgramId = p.Id,
+                                        StudentId = s.Id,
+                                        pd.ChangeDate,
+                                        programName = p.Description,
+                                        s.FirstName,
+                                        s.LastName,
+                                        DegreeTypeName = dt.Description
+                                    }).ToList();
+
+
+                    progdecs.ForEach(pd => rows.Add(new Models.ProgDec
                         {
-                            Id = pd.Id,
+                            Id = pd.ProdDecId,
                             ProgramId = pd.ProgramId,
                             StudentId = pd.StudentId,
-                            ChangeDate = pd.ChangeDate
+                            ChangeDate = pd.ChangeDate,
+                            ProgramName = pd.programName,
+                            DegreeTypeName = pd.DegreeTypeName,
+                            StudentName = pd.LastName + ", " + pd.FirstName
+
                            
                         }));
                     return rows;
@@ -156,10 +178,36 @@ namespace DTB.ProgDec.BL
             {
                 using (ProgDecEntities dc = new ProgDecEntities())
                 {
-                    tblProgDec row = dc.tblProgDecs.FirstOrDefault(pd => pd.Id == id);
-                    if (row != null)
+                    //tblProgDec row = dc.tblProgDecs.FirstOrDefault(pd => pd.Id == id);
+
+                    var progdec = (from pd in dc.tblProgDecs
+                                    join s in dc.tblStudents on pd.StudentId equals s.Id
+                                    join p in dc.tblPrograms on pd.ProgramId equals p.Id
+                                    join dt in dc.tblDegreeTypes on p.DegreeTypeId equals dt.Id
+                                    where pd.Id == id
+                                    select new
+                                    {
+                                        ProdDecId = pd.Id,
+                                        ProgramId = p.Id,
+                                        StudentId = s.Id,
+                                        pd.ChangeDate,
+                                        programName = p.Description,
+                                        s.FirstName,
+                                        s.LastName,
+                                        DegreeTypeName = dt.Description
+                                    }).FirstOrDefault();
+
+                    if (progdec != null)
                     {
-                        Models.ProgDec progDec = new Models.ProgDec { Id = row.Id, ProgramId = row.ProgramId, ChangeDate = row.ChangeDate, StudentId = row.StudentId };
+                        Models.ProgDec progDec = new Models.ProgDec {
+                            Id = progdec.ProdDecId,
+                            ProgramId = progdec.ProgramId,
+                            StudentId = progdec.StudentId,
+                            ChangeDate = progdec.ChangeDate,
+                            ProgramName = progdec.programName,
+                            DegreeTypeName = progdec.DegreeTypeName,
+                            StudentName = progdec.LastName + ", " + progdec.FirstName
+                        };
                         return progDec;
                     }
                     else
