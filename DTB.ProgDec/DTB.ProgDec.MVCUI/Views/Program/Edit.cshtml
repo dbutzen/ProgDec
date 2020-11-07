@@ -1,18 +1,15 @@
 ﻿@model DTB.ProgDec.MVCUI.ViewModels.ProgramDegreeTypes
 @{
-    ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
+<p class="text-danger">@ViewBag.Message</p>
 
-
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Program", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>Program</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Program.Id)
@@ -34,7 +31,14 @@
             </div>
         </div>
 
-      s
+        <div class="form-group">
+            @Html.LabelFor(model => model.Program.ImagePath, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <img src="~/Images/@Model.Program.ImagePath" id="programimage" class="imagepropmed" alt="@Model.Program.Description" onclick="on('/Images/@Model.Program.ImagePath');"/><br /><br />
+                <input type="file" name="File" id="File" accept="image/*" onchange="loadFile(event)" />
+                @Html.ValidationMessageFor(model => model.Program.DegreeTypeId, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -48,6 +52,13 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
-@section Scripts {
+<script>
+    var loadFile = function (event) {
+        var output = document.getElementById('programimage');
+        output.src = URL.createObjectURL(event.target.files[0]);
+    }
+</script>
+
+@*@section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-}
+}*@

@@ -14,6 +14,7 @@ namespace DTB.ProgDec.MVCUI.Controllers
         // GET: DegreeType
         public ActionResult Index()
         {
+            ViewBag.Title = "Degree Types";
             degreeTypes = DegreeTypeManager.Load();
             return View(degreeTypes);
         }
@@ -21,6 +22,7 @@ namespace DTB.ProgDec.MVCUI.Controllers
         // GET: DegreeType/Details/5
         public ActionResult Details(int id)
         {
+            ViewBag.Title = "Edit";
             DegreeType degreeType = new DegreeType();
             degreeType = DegreeTypeManager.LoadById(id);
             return View();
@@ -29,6 +31,7 @@ namespace DTB.ProgDec.MVCUI.Controllers
         // GET: DegreeType/Create
         public ActionResult Create()
         {
+            ViewBag.Title = "Create";
             DegreeType degreeType = new DegreeType();
             return View(degreeType);
         }
@@ -52,6 +55,8 @@ namespace DTB.ProgDec.MVCUI.Controllers
         // GET: DegreeType/Edit/5
         public ActionResult Edit(int id)
         {
+            ViewBag.Title = "Edit";
+
             DegreeType degreeType = new DegreeType();
             degreeType = DegreeTypeManager.LoadById(id);
             return View();
@@ -76,6 +81,8 @@ namespace DTB.ProgDec.MVCUI.Controllers
         // GET: DegreeType/Delete/5
         public ActionResult Delete(int id)
         {
+            ViewBag.Title = "Delete";
+
             DegreeType degreeType = new DegreeType();
             degreeType = DegreeTypeManager.LoadById(id);
             return View();

@@ -1,0 +1,25 @@
+﻿@model IEnumerable<DTB.ProgDec.BL.Models.Program>
+
+<table>
+
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.Description, "Load", "ProgDec", new { id = item.Id }, null)
+            </td>
+        </tr>
+    }
+    <tr>
+        <td>
+            @Html.ActionLink("Show All", "Index", "PorgDec")
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.ActionLink("New Declaration", "Create", "PorgDec")
+        </td>
+    </tr>
+
+</table>

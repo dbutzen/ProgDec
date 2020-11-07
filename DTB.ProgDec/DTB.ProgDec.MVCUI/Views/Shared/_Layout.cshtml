@@ -45,16 +45,49 @@
             </ul>
         </div>
     </nav>
-    <div class="container body-content rounded-top">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2 sidebar rounded-top">
+                <div class="header rounded-top">
+                    <h3>Programs</h3>
+                </div>
+                <div>
+                    @{ Html.RenderAction("Sidebar", "Program");}
+                </div>
+            </div>
+
+            <div id="overlay" onclick="off()" >
+                <div id="imagepropbig">
+                    <img src="#" class="imagepropbig" id="output"/>
+                </div>
+            </div>
+           
+            <div class="col-md-9 container main body-content rounded-top">
+                <div class="header rounded-top">
+                    <h3>@ViewBag.Title</h3>
+                </div>
+                @RenderBody()
+                <hr />
+                <footer>
+                    <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+                </footer>
+            </div>
+        </div>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+    <script>
+        function on(picture) {
+            document.getElementById("overlay").style.display = "block";
+            document.getElementById("output").src = picture;
+        }
+        function off() {
+            document.getElementById("overlay").style.display = "none";
+        }
+    </script>
 </body>
 </html>

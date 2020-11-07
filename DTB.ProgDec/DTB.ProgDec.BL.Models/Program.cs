@@ -14,6 +14,8 @@ namespace DTB.ProgDec.BL.Models
         public int DegreeTypeId { get; set; }
         [DisplayName("Degree Name")]
         public string DegreeName { get; set; }
+        [DisplayName("Image")]
+        public string ImagePath { get; set; }
 
     }
 }

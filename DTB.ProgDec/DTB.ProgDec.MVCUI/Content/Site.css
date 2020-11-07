@@ -32,3 +32,73 @@ textarea {
 .table tr:nth-child(odd) {
     background-color: lightblue;
 }
+
+.header {
+    margin:0px;
+    padding:0px;
+    background-color:rebeccapurple;
+}
+
+.header h1, .header h2, .header h3{
+    margin:0px;
+    padding:0px 0px 0px 10px;
+    color:white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.main{
+    margin: 10px;
+    padding: 0px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
+}
+
+.sidebar{
+    margin: 10px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
+    min-height: 500px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.imageprop{
+    width: 100px;
+    height: 75px;
+}
+
+.imagepropmed {
+    width: 200px;
+    height: 150px;
+}
+
+.imagepropbig {
+    width: 700px;
+    height: 625px;
+}
+
+#overlay{
+    position: fixed;
+    display: none;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background-color: rgba(0,0,0,0.5);
+    z-index:2;
+    cursor:pointer;
+
+}
+
+#imagepropbig {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 50px;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+}

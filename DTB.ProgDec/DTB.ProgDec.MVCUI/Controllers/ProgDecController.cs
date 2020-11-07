@@ -14,13 +14,21 @@ namespace DTB.ProgDec.MVCUI.Controllers
         // GET: ProgDec
         public ActionResult Index()
         {
+            ViewBag.Title = "Index";
             var progdecs = ProgDecManager.Load();
             return View(progdecs);
+        }
+
+        public ActionResult Load(int id)
+        {
+            var progdecs = ProgDecManager.Load(id);
+            return View("Index", progdecs);
         }
 
         // GET: ProgDec/Details/5
         public ActionResult Details(int id)
         {
+            ViewBag.Title = "Details";
             var progdec = ProgramManager.LoadById(id);
             return View(progdec);
         }
@@ -28,6 +36,7 @@ namespace DTB.ProgDec.MVCUI.Controllers
         // GET: ProgDec/Create
         public ActionResult Create()
         {
+            ViewBag.Title = "Create";
             ProgDecProgramsStudents pps = new ProgDecProgramsStudents();
             pps.ProgDec = new BL.Models.ProgDec();
             pps.Programs = ProgramManager.Load();
@@ -56,6 +65,7 @@ namespace DTB.ProgDec.MVCUI.Controllers
         // GET: ProgDec/Edit/5
         public ActionResult Edit(int id)
         {
+            ViewBag.Title = "Edit";
             ProgDecProgramsStudents pps = new ProgDecProgramsStudents();
 
 
@@ -86,6 +96,7 @@ namespace DTB.ProgDec.MVCUI.Controllers
         // GET: ProgDec/Delete/5
         public ActionResult Delete(int id)
         {
+            ViewBag.Title = "Delete";
             BL.Models.ProgDec progdec = ProgDecManager.LoadById(id);
             return View(progdec);
         }

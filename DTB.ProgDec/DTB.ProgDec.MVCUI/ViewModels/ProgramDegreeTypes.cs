@@ -11,5 +11,7 @@ namespace DTB.ProgDec.MVCUI.ViewModels
     {
         public Program Program { get; set; }
         public List<DegreeType> DegreeTypes { get; set; }
+        public HttpPostedFileBase File { get; set; }
+
     }
 }

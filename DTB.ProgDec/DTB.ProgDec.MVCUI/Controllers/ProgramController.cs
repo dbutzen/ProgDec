@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using DTB.ProgDec.BL.Models;
 using DTB.ProgDec.BL;
 using DTB.ProgDec.MVCUI.ViewModels;
+using System.IO;
 
 namespace DTB.ProgDec.MVCUI.Controllers
 {
@@ -14,14 +15,23 @@ namespace DTB.ProgDec.MVCUI.Controllers
         // GET: Program
         public ActionResult Index()
         {
+            ViewBag.Title = "Index";
             var programs = ProgramManager.Load();
 
             return View(programs);
         }
 
+        [ChildActionOnly]
+        public ActionResult Sidebar()
+        {
+            var programs = ProgramManager.Load();
+            return PartialView(programs);
+        }
+
         // GET: Program/Details/5
         public ActionResult Details(int id)
         {
+            ViewBag.Title = "Details";
             Program program = ProgramManager.LoadById(id);
             return View(program);
         }
@@ -29,6 +39,7 @@ namespace DTB.ProgDec.MVCUI.Controllers
         // GET: Program/Create
         public ActionResult Create()
         {
+            ViewBag.Title = "Create";
             ProgramDegreeTypes pdts = new ProgramDegreeTypes();
 
             pdts.DegreeTypes = DegreeTypeManager.Load();
@@ -43,19 +54,37 @@ namespace DTB.ProgDec.MVCUI.Controllers
         {
             try
             {
+                if(pdts.File != null)
+                {
+                    pdts.Program.ImagePath = pdts.File.FileName;
+                    string target = Path.Combine(Server.MapPath("~/Images"), Path.GetFileName(pdts.File.FileName));
+
+                    if (!System.IO.File.Exists(target))
+                    {
+                        pdts.File.SaveAs(target);
+                        ViewBag.Message = "File Uploaded Successfully";
+                    }
+                    else
+                    {
+                        ViewBag.Message = "File already exists...";
+                    }
+                }
+
                 // TODO: Add insert logic here
                 ProgramManager.Insert(pdts.Program);
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ViewBag.Message = ex.Message;
+                return View(pdts);
             }
         }
 
         // GET: Program/Edit/5
         public ActionResult Edit(int id)
         {
+            ViewBag.Title = "Edit";
             ProgramDegreeTypes pdts = new ProgramDegreeTypes();
             pdts.DegreeTypes = DegreeTypeManager.Load();
             pdts.Program = ProgramManager.LoadById(id);
@@ -69,19 +98,36 @@ namespace DTB.ProgDec.MVCUI.Controllers
         {
             try
             {
+                if (pdts.File != null)
+                {
+                    pdts.Program.ImagePath = pdts.File.FileName;
+                    string target = Path.Combine(Server.MapPath("~/Images"), Path.GetFileName(pdts.File.FileName));
+
+                    if (!System.IO.File.Exists(target))
+                    {
+                        pdts.File.SaveAs(target);
+                        ViewBag.Message = "File Uploaded Successfully";
+                    }
+                    else
+                    {
+                        ViewBag.Message = "File already exists...";
+                    }
+                }
                 // TODO: Add update logic here
                 ProgramManager.Update(pdts.Program);
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ViewBag.Message = ex.Message;
+                return View(pdts);
             }
         }
 
         // GET: Program/Delete/5
         public ActionResult Delete(int id)
         {
+            ViewBag.Title = "Delete";
             Program program = ProgramManager.LoadById(id);
             return View(program);
         }

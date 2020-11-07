@@ -34,6 +34,7 @@ namespace DTB.ProgDec.BL
                     row.Id = dc.tblPrograms.Any() ? dc.tblPrograms.Max(p => p.Id) + 1 : 1;
                     row.Description = program.Description;
                     row.DegreeTypeId = program.DegreeTypeId;
+                    row.ImagePath = program.ImagePath;
                     program.Id = row.Id;
 
                     // Insert the row
@@ -69,6 +70,7 @@ namespace DTB.ProgDec.BL
                         //Set the properties
                         row.Description = program.Description;
                         row.DegreeTypeId = program.DegreeTypeId;
+                        row.ImagePath = program.ImagePath;
 
                         program.Id = row.Id;
                         // Insert the row
@@ -145,7 +147,8 @@ namespace DTB.ProgDec.BL
                                         p.Id,
                                         p.DegreeTypeId,
                                         p.Description,
-                                        DegreeName = dt.Description
+                                        DegreeName = dt.Description,
+                                        p.ImagePath
                                     }).ToList();
 
                     programs.ForEach(pdt => rows.Add(new Program
@@ -153,7 +156,8 @@ namespace DTB.ProgDec.BL
                         Id = pdt.Id,
                         DegreeTypeId = pdt.DegreeTypeId,
                         Description = pdt.Description,
-                        DegreeName = pdt.DegreeName
+                        DegreeName = pdt.DegreeName,
+                        ImagePath = pdt.ImagePath
                     })); ; ;
 
                     return rows;
@@ -182,7 +186,8 @@ namespace DTB.ProgDec.BL
                                    p.Id,
                                    p.DegreeTypeId,
                                    p.Description,
-                                   DegreeName = dt.Description
+                                   DegreeName = dt.Description,
+                                   p.ImagePath
                                }).FirstOrDefault();
 
                     if (pdt != null)
@@ -192,7 +197,8 @@ namespace DTB.ProgDec.BL
                             Id = pdt.Id,
                             Description = pdt.Description,
                             DegreeTypeId = pdt.DegreeTypeId,
-                            DegreeName = pdt.DegreeName 
+                            DegreeName = pdt.DegreeName,
+                            ImagePath = pdt.ImagePath
                         };
                         return program;
                     }

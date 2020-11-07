@@ -123,7 +123,12 @@ namespace DTB.ProgDec.BL
             }
         }
         // Retrieve all the degree types
+
         public static List<Models.ProgDec> Load()
+        {
+            return Load(null);
+        }
+        public static List<Models.ProgDec> Load(int? programId)
         {
             try
             {
@@ -135,6 +140,7 @@ namespace DTB.ProgDec.BL
                                     join s in dc.tblStudents on pd.StudentId equals s.Id
                                     join p in dc.tblPrograms on pd.ProgramId equals p.Id
                                     join dt in dc.tblDegreeTypes on p.DegreeTypeId equals dt.Id
+                                    where (pd.ProgramId == programId || programId == null)
                                     orderby s.LastName
                                     select new
                                     {

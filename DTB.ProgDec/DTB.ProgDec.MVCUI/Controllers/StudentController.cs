@@ -14,6 +14,7 @@ namespace DTB.ProgDec.MVCUI.Controllers
         // GET: Student
         public ActionResult Index()
         {
+            ViewBag.Title = "Index";
             students = StudentManager.Load();
             return View(students);
         }
@@ -21,6 +22,7 @@ namespace DTB.ProgDec.MVCUI.Controllers
         // GET: Student/Details/5
         public ActionResult Details(int id)
         {
+            ViewBag.Title = "Details";
             Student student = StudentManager.LoadById(id);
             return View(student);
         }
@@ -28,6 +30,7 @@ namespace DTB.ProgDec.MVCUI.Controllers
         // GET: Student/Create
         public ActionResult Create()
         {
+            ViewBag.Title = "Create";
             Student student = new Student();
             return View(student);
         }
@@ -51,6 +54,7 @@ namespace DTB.ProgDec.MVCUI.Controllers
         // GET: Student/Edit/5
         public ActionResult Edit(int id)
         {
+            ViewBag.Title = "Edit";
             Student student = StudentManager.LoadById(id);
             return View(student);
         }
@@ -74,6 +78,7 @@ namespace DTB.ProgDec.MVCUI.Controllers
         // GET: Student/Delete/5
         public ActionResult Delete(int id)
         {
+            ViewBag.Title = "Delete";
             Student student = StudentManager.LoadById(id);
             return View(student);
         }

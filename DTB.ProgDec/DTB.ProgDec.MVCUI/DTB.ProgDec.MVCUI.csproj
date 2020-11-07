@@ -151,6 +151,14 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\calendar.gif" />
+    <Content Include="Images\CSS.jpg" />
+    <Content Include="Images\helpdesk.jpg" />
+    <Content Include="Images\mobile.jpg" />
+    <Content Include="Images\NetworkAdmin.jpg" />
+    <Content Include="Images\SoftwareDeveloper.jpg" />
+    <Content Include="Images\SysAdmin.jpg" />
+    <Content Include="Images\WebDev.jpg" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -174,6 +182,7 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Images\images %281%29.zip" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -300,6 +309,7 @@
     <Content Include="Views\ProgDec\Create.cshtml" />
     <Content Include="Views\ProgDec\Edit.cshtml" />
     <Content Include="Views\ProgDec\Delete.cshtml" />
+    <Content Include="Views\Program\Sidebar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
