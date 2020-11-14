@@ -34,6 +34,7 @@ namespace DTB.ProgDec.BL
                     row.ProgramId = progDec.ProgramId;
                     row.StudentId = progDec.StudentId;
                     row.ChangeDate = DateTime.Now;
+                    progDec.Id = row.Id;
 
                     progDec.Id = row.Id;
                     progDec.ChangeDate = row.ChangeDate;
@@ -105,6 +106,7 @@ namespace DTB.ProgDec.BL
 
                     if (row != null)
                     {
+
                         dc.tblProgDecs.Remove(row);
                         results = dc.SaveChanges();
                         if (rollback) transaction.Rollback();
@@ -227,6 +229,11 @@ namespace DTB.ProgDec.BL
 
                 throw ex;
             }
+        }
+
+        public static List<Advisor> LoadAdvisors(int progDecId)
+        {
+            return AdvisorManager.Load(progDecId);
         }
     }
 }

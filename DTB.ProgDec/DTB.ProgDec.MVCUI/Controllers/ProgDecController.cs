@@ -29,7 +29,7 @@ namespace DTB.ProgDec.MVCUI.Controllers
         public ActionResult Details(int id)
         {
             ViewBag.Title = "Details";
-            var progdec = ProgramManager.LoadById(id);
+            var progdec = ProgDecManager.LoadById(id);
             return View(progdec);
         }
 
@@ -42,6 +42,8 @@ namespace DTB.ProgDec.MVCUI.Controllers
             pps.Programs = ProgramManager.Load();
             pps.Students = StudentManager.Load();
 
+            pps.Advisors = AdvisorManager.Load(); //Load All
+
 
             return View(pps);
         }
@@ -52,8 +54,8 @@ namespace DTB.ProgDec.MVCUI.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
                 ProgDecManager.Insert(pps.ProgDec);
+                pps.AdvisorIds.ToList().ForEach(a => ProgDecAdvisorManager.Add(pps.ProgDec.Id, a));
                 return RedirectToAction("Index");
             }
             catch
@@ -72,8 +74,13 @@ namespace DTB.ProgDec.MVCUI.Controllers
             pps.ProgDec = ProgDecManager.LoadById(id);
             pps.Programs = ProgramManager.Load();
             pps.Students = StudentManager.Load();
+            pps.Advisors = AdvisorManager.Load(); //Load All
+            pps.ProgDec.Advisors = ProgDecManager.LoadAdvisors(id);
+            pps.AdvisorIds = pps.ProgDec.Advisors.Select(a => a.Id); // Select the ids
 
 
+            // Put existing advisors for this progdec in session.
+            Session["advisorids"] = pps.AdvisorIds;
             return View(pps);
         }
 
@@ -83,7 +90,28 @@ namespace DTB.ProgDec.MVCUI.Controllers
         {
             try
             {
-                // TODO: Add update logic here
+                //Deal with the advisors
+                IEnumerable<int> oldadvisorids = new List<int>();
+                if(Session["advisorids"] != null)
+                {
+                    oldadvisorids = (IEnumerable<int>)Session["advisorids"];
+                }
+
+                IEnumerable<int> newadvisorids = new List<int>();
+                if(pps.AdvisorIds != null)
+                {
+                    newadvisorids = pps.AdvisorIds;
+                }
+
+                // Identify deletes
+                IEnumerable<int> deletes = oldadvisorids.Except(newadvisorids);
+
+                // Identify Adds
+                IEnumerable<int> adds = newadvisorids.Except(oldadvisorids);
+
+                deletes.ToList().ForEach(d => ProgDecAdvisorManager.Delete(id, d));
+                adds.ToList().ForEach(a => ProgDecAdvisorManager.Add(id, a));
+
                 ProgDecManager.Update(pps.ProgDec);
                 return RedirectToAction("Index");
             }
@@ -103,11 +131,14 @@ namespace DTB.ProgDec.MVCUI.Controllers
 
         // POST: ProgDec/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, BL.Models.ProgDec progDec)
         {
             try
             {
                 // TODO: Add delete logic here
+                progDec.Advisors = ProgDecManager.LoadAdvisors(id);
+                progDec.Advisors.ForEach(a => ProgDecAdvisorManager.Delete(id, a.Id));
+
                 ProgDecManager.Delete(id);
                 return RedirectToAction("Index");
             }

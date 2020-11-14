@@ -66,10 +66,16 @@
       <DependentUpon>ProgDec.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="tblAdvisor.cs">
+      <DependentUpon>ProgDec.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblDegreeType.cs">
       <DependentUpon>ProgDec.tt</DependentUpon>
     </Compile>
     <Compile Include="tblProgDec.cs">
+      <DependentUpon>ProgDec.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblProgDecAdvisor.cs">
       <DependentUpon>ProgDec.tt</DependentUpon>
     </Compile>
     <Compile Include="tblProgram.cs">

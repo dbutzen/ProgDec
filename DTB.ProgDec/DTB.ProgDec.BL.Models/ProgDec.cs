@@ -20,7 +20,11 @@ namespace DTB.ProgDec.BL.Models
         public string StudentName { get; set; }
         [DisplayName("Degree Type Name")]
         public string DegreeTypeName { get; set; }
+        public List<Advisor> Advisors { get; set; }
 
-
+        public ProgDec()
+        {
+            Advisors = new List<Advisor>();
+        }
     }
 }

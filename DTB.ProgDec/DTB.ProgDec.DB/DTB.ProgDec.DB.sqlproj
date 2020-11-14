@@ -60,12 +60,18 @@
     <Folder Include="Pre-Deployment" />
     <Folder Include="Post-Deployment" />
     <Folder Include="Post-Deployment\DefaultData" />
+    <Folder Include="Post-Deployment\temp" />
+    <Folder Include="Tables\temp" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\tblProgram.sql" />
     <Build Include="Tables\tblDegreeType.sql" />
     <Build Include="Tables\tblStudent.sql" />
     <Build Include="Tables\tblProgDec.sql" />
+    <None Include="Post-Deployment\DefaultData\Advisors.sql" />
+    <None Include="Post-Deployment\DefaultData\ProgDecAdvisors.sql" />
+    <Build Include="Tables\tblAdvisor.sql" />
+    <Build Include="Tables\tblProgDecAdvisor.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Post-Deployment\DefaultData\DegreeTypes.sql" />

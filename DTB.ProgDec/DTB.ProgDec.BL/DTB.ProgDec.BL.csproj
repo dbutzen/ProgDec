@@ -51,7 +51,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdvisorManager.cs" />
     <Compile Include="DegreeTypeManager.cs" />
+    <Compile Include="ProgDecAdvisorManager.cs" />
     <Compile Include="ProgDecManager.cs" />
     <Compile Include="ProgramManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -10,6 +10,8 @@
 --------------------------------------------------------------------------------------
 */
 
+DROP TABLE IF EXISTS [dbo].[tblProgDecAdvisor]
+DROP TABLE IF EXISTS [dbo].[tblAdvisor]
 DROP TABLE IF EXISTS [dbo].[tblStudent]
 DROP TABLE IF EXISTS [dbo].[tblProgDec]
 DROP TABLE IF EXISTS [dbo].[tblProgram]

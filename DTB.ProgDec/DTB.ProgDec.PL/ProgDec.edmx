@@ -5,6 +5,13 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="butzendbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblAdvisor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
         <EntityType Name="tblDegreeType">
           <Key>
             <PropertyRef Name="Id" />
@@ -20,6 +27,14 @@
           <Property Name="ProgramId" Type="int" Nullable="false" />
           <Property Name="StudentId" Type="int" Nullable="false" />
           <Property Name="ChangeDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblProgDecAdvisor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ProgDecId" Type="int" Nullable="false" />
+          <Property Name="AdvisorId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tblProgram">
           <Key>
@@ -40,8 +55,10 @@
           <Property Name="StudentId" Type="varchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityContainer Name="butzendbModelStoreContainer">
+          <EntitySet Name="tblAdvisor" EntityType="Self.tblAdvisor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblDegreeType" EntityType="Self.tblDegreeType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblProgDec" EntityType="Self.tblProgDec" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblProgDecAdvisor" EntityType="Self.tblProgDecAdvisor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblProgram" EntityType="Self.tblProgram" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblStudent" EntityType="Self.tblStudent" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
@@ -88,7 +105,24 @@
           <EntitySet Name="tblProgDecs" EntityType="Self.tblProgDec" />
           <EntitySet Name="tblPrograms" EntityType="Self.tblProgram" />
           <EntitySet Name="tblStudents" EntityType="Self.tblStudent" />
+          <EntitySet Name="tblAdvisors" EntityType="butzendbModel.tblAdvisor" />
+          <EntitySet Name="tblProgDecAdvisors" EntityType="butzendbModel.tblProgDecAdvisor" />
         </EntityContainer>
+        <EntityType Name="tblAdvisor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblProgDecAdvisor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ProgDecId" Type="Int32" Nullable="false" />
+          <Property Name="AdvisorId" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -130,6 +164,23 @@
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblAdvisors">
+            <EntityTypeMapping TypeName="butzendbModel.tblAdvisor">
+              <MappingFragment StoreEntitySet="tblAdvisor">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblProgDecAdvisors">
+            <EntityTypeMapping TypeName="butzendbModel.tblProgDecAdvisor">
+              <MappingFragment StoreEntitySet="tblProgDecAdvisor">
+                <ScalarProperty Name="AdvisorId" ColumnName="AdvisorId" />
+                <ScalarProperty Name="ProgDecId" ColumnName="ProgDecId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

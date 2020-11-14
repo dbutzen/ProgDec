@@ -14,3 +14,5 @@ Post-Deployment Script Template
 :r .\DefaultData\DegreeTypes.sql
 :r .\DefaultData\Programs.sql
 :r .\DefaultData\ProgDecs.sql
+:r .\DefaultData\Advisors.sql
+:r .\DefaultData\ProgDecAdvisors.sql
