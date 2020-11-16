@@ -7,6 +7,7 @@ using DTB.ProgDec.BL.Models;
 using DTB.ProgDec.BL;
 using DTB.ProgDec.MVCUI.ViewModels;
 using System.IO;
+using DTB.ProgDec.MVCUI.Models;
 
 namespace DTB.ProgDec.MVCUI.Controllers
 {
@@ -16,9 +17,16 @@ namespace DTB.ProgDec.MVCUI.Controllers
         public ActionResult Index()
         {
             ViewBag.Title = "Index";
-            var programs = ProgramManager.Load();
+            if (Authenticate.IsAuthenticated())
+            {
+                var programs = ProgramManager.Load();
 
-            return View(programs);
+                return View(programs);
+            }
+            else
+            {
+                return RedirectToAction("Login", "User", new { returnurl = HttpContext.Request.Url });
+            }
         }
 
         [ChildActionOnly]
@@ -40,12 +48,19 @@ namespace DTB.ProgDec.MVCUI.Controllers
         public ActionResult Create()
         {
             ViewBag.Title = "Create";
-            ProgramDegreeTypes pdts = new ProgramDegreeTypes();
+            if (Authenticate.IsAuthenticated())
+            {
+                ProgramDegreeTypes pdts = new ProgramDegreeTypes();
 
-            pdts.DegreeTypes = DegreeTypeManager.Load();
-            pdts.Program = new Program();
+                pdts.DegreeTypes = DegreeTypeManager.Load();
+                pdts.Program = new Program();
 
-            return View(pdts);
+                return View(pdts);
+            }
+            else
+            {
+                return RedirectToAction("Login", "User", new { returnurl = HttpContext.Request.Url });
+            }
         }
 
         // POST: Program/Create
@@ -85,11 +100,17 @@ namespace DTB.ProgDec.MVCUI.Controllers
         public ActionResult Edit(int id)
         {
             ViewBag.Title = "Edit";
+            if (Authenticate.IsAuthenticated()) { 
             ProgramDegreeTypes pdts = new ProgramDegreeTypes();
             pdts.DegreeTypes = DegreeTypeManager.Load();
             pdts.Program = ProgramManager.LoadById(id);
 
             return View(pdts);
+            }
+            else
+            {
+                return RedirectToAction("Login", "User", new { returnurl = HttpContext.Request.Url });
+            }
         }
 
         // POST: Program/Edit/5
@@ -128,8 +149,14 @@ namespace DTB.ProgDec.MVCUI.Controllers
         public ActionResult Delete(int id)
         {
             ViewBag.Title = "Delete";
+            if (Authenticate.IsAuthenticated()) { 
             Program program = ProgramManager.LoadById(id);
             return View(program);
+            }
+            else
+            {
+                return RedirectToAction("Login", "User", new { returnurl = HttpContext.Request.Url });
+            }
         }
 
         // POST: Program/Delete/5

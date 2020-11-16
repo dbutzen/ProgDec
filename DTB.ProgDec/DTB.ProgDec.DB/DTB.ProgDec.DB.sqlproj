@@ -72,6 +72,7 @@
     <None Include="Post-Deployment\DefaultData\ProgDecAdvisors.sql" />
     <Build Include="Tables\tblAdvisor.sql" />
     <Build Include="Tables\tblProgDecAdvisor.sql" />
+    <Build Include="Tables\tblUser.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Post-Deployment\DefaultData\DegreeTypes.sql" />

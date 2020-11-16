@@ -31,5 +31,6 @@ namespace DTB.ProgDec.PL
         public virtual DbSet<tblStudent> tblStudents { get; set; }
         public virtual DbSet<tblAdvisor> tblAdvisors { get; set; }
         public virtual DbSet<tblProgDecAdvisor> tblProgDecAdvisors { get; set; }
+        public virtual DbSet<tblUser> tblUsers { get; set; }
     }
 }

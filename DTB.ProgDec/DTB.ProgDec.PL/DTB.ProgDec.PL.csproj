@@ -84,6 +84,9 @@
     <Compile Include="tblStudent.cs">
       <DependentUpon>ProgDec.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblUser.cs">
+      <DependentUpon>ProgDec.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="ProgDec.edmx">

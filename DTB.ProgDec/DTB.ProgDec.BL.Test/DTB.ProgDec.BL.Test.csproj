@@ -57,6 +57,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="utUser.cs" />
     <Compile Include="urProgram.cs" />
     <Compile Include="utProgDec.cs" />
     <Compile Include="utStudent.cs" />
