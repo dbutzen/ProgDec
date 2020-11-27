@@ -72,6 +72,12 @@
     <Compile Include="tblDegreeType.cs">
       <DependentUpon>ProgDec.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblPDOrder.cs">
+      <DependentUpon>ProgDec.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblPDOrderItem.cs">
+      <DependentUpon>ProgDec.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblProgDec.cs">
       <DependentUpon>ProgDec.tt</DependentUpon>
     </Compile>

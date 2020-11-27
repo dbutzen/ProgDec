@@ -51,7 +51,8 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index") |
+    @Html.ActionLink("Add to Cart", "AddToCart", "ShoppingCart", new { id = Model.ProgDec.Id }, null)
 </div>
 
 @section Scripts {

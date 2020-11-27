@@ -73,6 +73,8 @@
     <Build Include="Tables\tblAdvisor.sql" />
     <Build Include="Tables\tblProgDecAdvisor.sql" />
     <Build Include="Tables\tblUser.sql" />
+    <Build Include="Tables\tblPDOrderItems.sql" />
+    <Build Include="Tables\tblPDOrder.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Post-Deployment\DefaultData\DegreeTypes.sql" />

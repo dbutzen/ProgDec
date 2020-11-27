@@ -19,6 +19,21 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="tblPDOrder">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblPDOrderItems">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ItemId" Type="int" Nullable="false" />
+          <Property Name="OrderId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="tblProgDec">
           <Key>
             <PropertyRef Name="Id" />
@@ -67,6 +82,8 @@
         <EntityContainer Name="butzendbModelStoreContainer">
           <EntitySet Name="tblAdvisor" EntityType="Self.tblAdvisor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblDegreeType" EntityType="Self.tblDegreeType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblPDOrder" EntityType="Self.tblPDOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblPDOrderItems" EntityType="Self.tblPDOrderItems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblProgDec" EntityType="Self.tblProgDec" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblProgDecAdvisor" EntityType="Self.tblProgDecAdvisor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblProgram" EntityType="Self.tblProgram" Schema="dbo" store:Type="Tables" />
@@ -77,12 +94,45 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="butzendbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ProgDecEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblAdvisors" EntityType="butzendbModel.tblAdvisor" />
+          <EntitySet Name="tblDegreeTypes" EntityType="butzendbModel.tblDegreeType" />
+          <EntitySet Name="tblPDOrders" EntityType="butzendbModel.tblPDOrder" />
+          <EntitySet Name="tblPDOrderItems" EntityType="butzendbModel.tblPDOrderItem" />
+          <EntitySet Name="tblProgDecs" EntityType="butzendbModel.tblProgDec" />
+          <EntitySet Name="tblProgDecAdvisors" EntityType="butzendbModel.tblProgDecAdvisor" />
+          <EntitySet Name="tblPrograms" EntityType="butzendbModel.tblProgram" />
+          <EntitySet Name="tblStudents" EntityType="butzendbModel.tblStudent" />
+          <EntitySet Name="tblUsers" EntityType="butzendbModel.tblUser" />
+        </EntityContainer>
+        <EntityType Name="tblAdvisor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="tblDegreeType">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblPDOrder">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblPDOrderItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ItemId" Type="Int32" Nullable="false" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="tblProgDec">
           <Key>
@@ -93,12 +143,20 @@
           <Property Name="StudentId" Type="Int32" Nullable="false" />
           <Property Name="ChangeDate" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
+        <EntityType Name="tblProgDecAdvisor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ProgDecId" Type="Int32" Nullable="false" />
+          <Property Name="AdvisorId" Type="Int32" Nullable="false" />
+        </EntityType>
         <EntityType Name="tblProgram">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DegreeTypeId" Type="Int32" Nullable="false" />
           <Property Name="ImagePath" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
@@ -107,33 +165,9 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="FirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="LastName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="StudentId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
-        <EntityContainer Name="ProgDecEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="tblDegreeTypes" EntityType="Self.tblDegreeType" />
-          <EntitySet Name="tblProgDecs" EntityType="Self.tblProgDec" />
-          <EntitySet Name="tblPrograms" EntityType="Self.tblProgram" />
-          <EntitySet Name="tblStudents" EntityType="Self.tblStudent" />
-          <EntitySet Name="tblAdvisors" EntityType="butzendbModel.tblAdvisor" />
-          <EntitySet Name="tblProgDecAdvisors" EntityType="butzendbModel.tblProgDecAdvisor" />
-          <EntitySet Name="tblUsers" EntityType="butzendbModel.tblUser" />
-        </EntityContainer>
-        <EntityType Name="tblAdvisor">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="tblProgDecAdvisor">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="ProgDecId" Type="Int32" Nullable="false" />
-          <Property Name="AdvisorId" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="StudentId" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="tblUser">
           <Key>
@@ -145,54 +179,51 @@
           <Property Name="LastName" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="UserPass" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
         </EntityType>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="butzendbModelStoreContainer" CdmEntityContainer="ProgDecEntities">
+          <EntitySetMapping Name="tblAdvisors">
+            <EntityTypeMapping TypeName="butzendbModel.tblAdvisor">
+              <MappingFragment StoreEntitySet="tblAdvisor">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tblDegreeTypes">
             <EntityTypeMapping TypeName="butzendbModel.tblDegreeType">
               <MappingFragment StoreEntitySet="tblDegreeType">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblPDOrders">
+            <EntityTypeMapping TypeName="butzendbModel.tblPDOrder">
+              <MappingFragment StoreEntitySet="tblPDOrder">
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblPDOrderItems">
+            <EntityTypeMapping TypeName="butzendbModel.tblPDOrderItem">
+              <MappingFragment StoreEntitySet="tblPDOrderItems">
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblProgDecs">
             <EntityTypeMapping TypeName="butzendbModel.tblProgDec">
               <MappingFragment StoreEntitySet="tblProgDec">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="ProgramId" ColumnName="ProgramId" />
-                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
                 <ScalarProperty Name="ChangeDate" ColumnName="ChangeDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tblPrograms">
-            <EntityTypeMapping TypeName="butzendbModel.tblProgram">
-              <MappingFragment StoreEntitySet="tblProgram">
-                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="DegreeTypeId" ColumnName="DegreeTypeId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tblStudents">
-            <EntityTypeMapping TypeName="butzendbModel.tblStudent">
-              <MappingFragment StoreEntitySet="tblStudent">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="StudentId" ColumnName="StudentId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tblAdvisors">
-            <EntityTypeMapping TypeName="butzendbModel.tblAdvisor">
-              <MappingFragment StoreEntitySet="tblAdvisor">
-                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ProgramId" ColumnName="ProgramId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -202,6 +233,26 @@
               <MappingFragment StoreEntitySet="tblProgDecAdvisor">
                 <ScalarProperty Name="AdvisorId" ColumnName="AdvisorId" />
                 <ScalarProperty Name="ProgDecId" ColumnName="ProgDecId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblPrograms">
+            <EntityTypeMapping TypeName="butzendbModel.tblProgram">
+              <MappingFragment StoreEntitySet="tblProgram">
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+                <ScalarProperty Name="DegreeTypeId" ColumnName="DegreeTypeId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblStudents">
+            <EntityTypeMapping TypeName="butzendbModel.tblStudent">
+              <MappingFragment StoreEntitySet="tblStudent">
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -25,12 +25,14 @@ namespace DTB.ProgDec.PL
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<tblAdvisor> tblAdvisors { get; set; }
         public virtual DbSet<tblDegreeType> tblDegreeTypes { get; set; }
+        public virtual DbSet<tblPDOrder> tblPDOrders { get; set; }
+        public virtual DbSet<tblPDOrderItem> tblPDOrderItems { get; set; }
         public virtual DbSet<tblProgDec> tblProgDecs { get; set; }
+        public virtual DbSet<tblProgDecAdvisor> tblProgDecAdvisors { get; set; }
         public virtual DbSet<tblProgram> tblPrograms { get; set; }
         public virtual DbSet<tblStudent> tblStudents { get; set; }
-        public virtual DbSet<tblAdvisor> tblAdvisors { get; set; }
-        public virtual DbSet<tblProgDecAdvisor> tblProgDecAdvisors { get; set; }
         public virtual DbSet<tblUser> tblUsers { get; set; }
     }
 }

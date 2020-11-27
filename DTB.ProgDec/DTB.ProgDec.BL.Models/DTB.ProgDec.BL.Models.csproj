@@ -43,9 +43,12 @@
   <ItemGroup>
     <Compile Include="Advisor.cs" />
     <Compile Include="DegreeType.cs" />
+    <Compile Include="Order.cs" />
+    <Compile Include="OrderItem.cs" />
     <Compile Include="ProgDec.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShoppingCart.cs" />
     <Compile Include="Student.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>

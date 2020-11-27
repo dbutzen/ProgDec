@@ -61,6 +61,12 @@
                 <div>
                     @{ Html.RenderAction("Sidebar", "Program");}
                 </div>
+                <div class="header rounded-top">
+                    <h3>Shopping Cart</h3>
+                </div>
+                <div>
+                    @{ Html.RenderAction("CartDisplay", "ShoppingCart");}
+                </div>
             </div>
 
             <div id="overlay" onclick="off()" >

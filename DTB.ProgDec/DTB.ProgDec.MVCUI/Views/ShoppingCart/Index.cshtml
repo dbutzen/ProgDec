@@ -1,0 +1,68 @@
+﻿@model DTB.ProgDec.BL.Models.ShoppingCart
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<table class="table">
+    <tr>
+        <th>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Items[0].ProgramName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Items[0].StudentName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Items[0].DegreeTypeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Items[0].ChangeDate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.Items) {
+<tr>
+    <td>
+        @*<img src="~/Images/@item.ImagePath" /> For DVD*@
+        <img src="~/Images/SoftwareDeveloper.jpg" class="imageprop" />
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ProgramName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.StudentName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.DegreeTypeName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ChangeDate)
+    </td>
+    <td>
+        @Html.ActionLink("Remove from Cart", "RemoveFromCart", new { id = item.Id })
+    </td>
+</tr>
+}
+
+</table>
+
+<div class="form-group">
+    Total Items: @Model.TotalCount
+    <br />
+    Cost: @Model.TotalCost
+    <br />
+    Tax: @(Model.TotalCount * 2.5)
+    <hr />
+    Total Cost: @(Model.TotalCost + Model.TotalCount * 2.5)
+
+</div>
+
+
+<div class="form-group">
+    <div>@Html.ActionLink("Check Out", "Checkout", "ShoppingCart", null, new { @class = "btn btn-primary" })</div>
+</div>
