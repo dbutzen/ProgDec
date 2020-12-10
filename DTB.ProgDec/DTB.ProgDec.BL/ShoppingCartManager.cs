@@ -11,10 +11,10 @@ namespace DTB.ProgDec.BL
     {
         public static void Checkout(ShoppingCart cart)
         {
-            /* For DVD Central, do these thing swhen you checkout
+            /* For DVD Central, do these things when you checkout
              * Add OrderManager
              * 1) Insert a tblOrder. Get the Order.Id
-             * 2)Loop through the ITems, and insert a tblOrderITem record
+             * 2)Loop through the Items, and insert a tblOrderITem record
              * with the new Order.Id
              * 3) Remove the items from the cart
              */

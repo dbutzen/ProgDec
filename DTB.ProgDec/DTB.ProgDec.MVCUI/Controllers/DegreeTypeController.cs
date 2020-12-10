@@ -1,15 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 using DTB.ProgDec.BL;
 using DTB.ProgDec.BL.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace DTB.ProgDec.MVCUI.Controllers
 {
+    
     public class DegreeTypeController : Controller
     {
+        #region "Pre-WebAPI"
         List<DegreeType> degreeTypes;
         // GET: DegreeType
         public ActionResult Index()
@@ -103,5 +108,131 @@ namespace DTB.ProgDec.MVCUI.Controllers
                 return View();
             }
         }
+        #endregion
+        #region "WebAPI"
+
+        private static HttpClient InitializationClient()
+        {
+            HttpClient client = new HttpClient();
+            //client.BaseAddress = new Uri("https://localhost:44317/api/");
+
+            client.BaseAddress = new Uri("http://dtbprogdecapi.azurewebsites.net/api/");
+            return client;
+        }
+
+        public ActionResult Get()
+        {
+            HttpClient client = InitializationClient();
+
+            // Do the actual call to the WebAPI
+            HttpResponseMessage reponse = client.GetAsync("DegreeType").Result;
+            //Parse the result
+            string result = reponse.Content.ReadAsStringAsync().Result;
+            //Parse the result into generic objects
+            dynamic items = (JArray)JsonConvert.DeserializeObject(result);
+            //Pase the items into a list of degreeType
+            List<DegreeType> degreeTypes = items.ToObject<List<DegreeType>>();
+
+            ViewBag.Source = "Get";
+            return View("Index", degreeTypes);
+
+        }
+
+        public ActionResult GetOne(int id)
+        {
+            HttpClient client = InitializationClient();
+
+            // Do the actual call to the WebAPI
+            HttpResponseMessage reponse = client.GetAsync("DegreeType/" + id).Result;
+            //Parse the result
+            string result = reponse.Content.ReadAsStringAsync().Result;
+            //Parse the result into generic objects
+            DegreeType degreeType = JsonConvert.DeserializeObject<DegreeType>(result);
+
+            return View("Details", degreeType);
+        }
+
+        public ActionResult Insert()
+        {
+            HttpClient client = InitializationClient();
+
+            DegreeType degreeType = new DegreeType();
+            return View("Create", degreeType);
+        }
+        [HttpPost]
+        public ActionResult Insert(DegreeType degreeType)
+        {
+            try
+            {
+                HttpClient client = InitializationClient();
+                HttpResponseMessage response = client.PostAsJsonAsync("DegreeType", degreeType).Result;
+                return RedirectToAction("Get");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return View("Create", degreeType);
+            }
+
+        }
+
+        public ActionResult Update(int id)
+        {
+            HttpClient client = InitializationClient();
+
+
+            HttpResponseMessage response = client.GetAsync("DegreeType/" + id).Result;
+            string result = response.Content.ReadAsStringAsync().Result;
+            DegreeType degreeType = JsonConvert.DeserializeObject<DegreeType>(result);
+
+            return View("Edit", degreeType);
+        }
+
+
+
+        [HttpPost]
+        public ActionResult Update(int id, DegreeType degreeType)
+        {
+            try
+            {
+                HttpClient client = InitializationClient();
+                HttpResponseMessage response = client.PutAsJsonAsync("DegreeType/" + id, degreeType).Result;
+                return RedirectToAction("Get");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return View("Edit", degreeType);
+            }
+
+        }
+
+        public ActionResult Remove(int id)
+        {
+            HttpClient client = InitializationClient();
+            HttpResponseMessage response = client.GetAsync("DegreeType/" + id).Result;
+            string result = response.Content.ReadAsStringAsync().Result;
+            DegreeType degreeType = JsonConvert.DeserializeObject<DegreeType>(result);
+            return View("Delete", degreeType);
+        }
+
+        [HttpPost]
+        public ActionResult Remove(int id, DegreeType degreeType)
+        {
+            try
+            {
+                HttpClient client = InitializationClient();
+                HttpResponseMessage response = client.DeleteAsync("DegreeType/" + id).Result;
+                return RedirectToAction("Get");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return View("Delete", degreeType);
+            }
+
+        }
+
+        #endregion
     }
 }

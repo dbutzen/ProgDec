@@ -27,14 +27,12 @@ namespace DTB.ProgDec.MVCUI.Controllers
                 {
                     // Login worked, save user to session
                     Session["user"] = user;
-                    //return RedirectToAction("Index", "ProgDec");
                     return Redirect(returnurl);
                 }
-                else
-                {
+                
                     ViewBag.Message = "Sorry, no.";
                     return View(user);
-                }
+                
             }
             catch (Exception ex)
             {
